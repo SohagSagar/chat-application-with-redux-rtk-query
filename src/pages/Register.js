@@ -7,7 +7,7 @@ import Error from '../components/ui/Error'
 
 export default function Register() {
 
-    const [register, {data, isLoading, isError, error: responseError }] = useRegisterMutation()
+    const [register, { data, isLoading, isError, error: responseError }] = useRegisterMutation()
     const navigate = useNavigate()
 
     const [name, setName] = useState('');
@@ -31,22 +31,20 @@ export default function Register() {
                 name,
                 email,
                 password,
-                confirmPassword,
-                isAggreed
             }
             register(registeredData)
         }
     }
 
-    useEffect(()=>{
-        if(isError){
+    useEffect(() => {
+        if (isError) {
             setError(responseError?.data);
-        }else if(data?.accessToken && data?.user){
+        } else if (data?.accessToken && data?.user) {
             navigate('/inbox')
         }
-        
-    },[responseError,isError,data,navigate])
-    
+
+    }, [responseError, isError, data, navigate])
+
 
 
 
@@ -147,6 +145,7 @@ export default function Register() {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
+                                    required
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"
@@ -175,7 +174,7 @@ export default function Register() {
                         </div>
 
                         {
-                            error && <Error message={error}/>
+                            error && <Error message={error} />
                         }
                     </form>
                 </div>

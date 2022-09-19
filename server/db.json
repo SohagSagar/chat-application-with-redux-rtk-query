@@ -1,74 +1,16 @@
 {
   "users": [
     {
-      "email": "sumit@gmail.com",
-      "password": "$2a$10$bSWfL6mCRSzCG8DNMv7bAOWFyA.K3Jp3vWtdetWzcnRG9PP5YyDV2",
-      "name": "sumit",
+      "email": "sagor@gmail.com",
+      "password": "$2a$10$JB57CpwZUk6MUCx57du5ROqX.8bbbF23c4WpNG54c0niyRtb621mq",
+      "name": "sagor",
       "id": 1
     },
     {
-      "email": "sumit1@gmail.com",
-      "password": "$2a$10$rnINwcetPHGI/U8r0OS1T.zM61NQEB58n8uXz8f3DxLcjDw8nRDpi",
-      "name": "sumit1",
-      "confirmPassword": "1234",
-      "isAggreed": true,
+      "email": "sumit@learnwithsumit.com",
+      "password": "$2a$10$jaOOqhDIoiHeWnqNzWevx.uiTD9xnhzamsrGyIhkJVGQTl3ZjyPZi",
+      "name": "sumit",
       "id": 2
-    },
-    {
-      "email": "sagor@gmail.com",
-      "password": "$2a$10$5pXXs29KOVSxRrmYjzypMuzVQfOMjxAZsdHxKWawWah9BpP23VWl.",
-      "name": "sagor",
-      "confirmPassword": "1234",
-      "isAggreed": true,
-      "id": 3
-    },
-    {
-      "email": "sohagsagar1@gmail.com",
-      "password": "$2a$10$4bGFUAxGKSrasWMW7G7/ceyTlccEjXLmpu7Bm3jFqYftWzXgGkXvm",
-      "name": "sumit",
-      "confirmPassword": "1234",
-      "isAggreed": true,
-      "id": 4
-    },
-    {
-      "email": "mehraztabassum5@gmail.com",
-      "password": "$2a$10$aF5AI0oyPvpE72nRDkJoIuHpRNkXXOn0vAp.gc/FoVa174iLpKwKe",
-      "name": "sumit",
-      "confirmPassword": "1234",
-      "isAggreed": true,
-      "id": 5
-    },
-    {
-      "email": "mehraztabassum6@gmail.com",
-      "password": "$2a$10$DFydv1s9S28Uwiqero2GHOYmUy6ZDARDJ7iri9db/idBw26LggQ/u",
-      "name": "sumit",
-      "confirmPassword": "1234",
-      "isAggreed": true,
-      "id": 6
-    },
-    {
-      "email": "sohagsagar2@gmail.com",
-      "password": "$2a$10$h3YxVz6M/J7ZuavvwGrlw.K0xGKEv/G1v.kuMRFPzgMT4NmwaYdUi",
-      "name": "sumit",
-      "confirmPassword": "1111",
-      "isAggreed": true,
-      "id": 7
-    },
-    {
-      "email": "sohagsagar6@gmail.com",
-      "password": "$2a$10$xitBSb3vKyJz5N28BGjIvePIN.ZEXK1fXP7rvbbzSHQ94vLRExR96",
-      "name": "sumit",
-      "confirmPassword": "123456",
-      "isAggreed": true,
-      "id": 8
-    },
-    {
-      "email": "sohagsagar10@gmail.com",
-      "password": "$2a$10$W2LSZYdvu0TX8ZPQ/lCyP.1QyyYRpHkqNFhO0GUVd8uafFaQJ8vDa",
-      "name": "sumit",
-      "confirmPassword": "1234",
-      "isAggreed": true,
-      "id": 9
     }
   ],
   "conversations": [
