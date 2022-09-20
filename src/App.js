@@ -10,9 +10,6 @@ import Register from "./pages/Register";
 function App() {
     const isAuthChecked = useAuthCheck();
 
-
-
-
     return !isAuthChecked ? (<div>Cheaking authentication...</div>) : (
         <Router>
             <Routes>
