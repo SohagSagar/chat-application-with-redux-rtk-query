@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../../assets/images/lws-logo-dark.svg";
 import { userLoggedOut } from "../../features/auth/authSlice";
@@ -11,6 +11,7 @@ export default function Navigation() {
         localStorage.clear()
         dispatch(userLoggedOut())
     }
+    const {user} = useSelector(state=>state.auth)
     return (
         <nav className="border-general sticky top-0 z-40 border-b bg-violet-700 transition-colors">
             <div className="max-w-7xl mx-auto">
@@ -24,7 +25,7 @@ export default function Navigation() {
                     </Link>
                     <ul onClick={handleLogout}>
                         <li className="text-white cursor-pointer">
-                            Logout
+                           {`${user && user.name.slice()[0].toUpperCase().concat( user.name.slice(1) )} Logout`}
                         </li>
                     </ul>
                 </div>
