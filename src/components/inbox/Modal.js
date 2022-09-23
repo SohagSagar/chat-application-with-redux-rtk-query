@@ -87,7 +87,6 @@ export default function Modal({ open, control }) {
     useEffect(() => {
         if (isSuccessAddConversation || isSuccessEditConversation) {
             control();
-            console.log('modal controlled called');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSuccessAddConversation, isSuccessEditConversation])
