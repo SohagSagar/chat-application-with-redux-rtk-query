@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 })
 export const apiSlice = createApi({
     reducerPath: 'api',
-    tagTypes: ['conversations'],
+    tagTypes: ['conversations',"messages"],
     baseQuery: async (args, api, extraOptions) => {
         let result = await baseQuery(args, api, extraOptions);
         if (result?.error?.status === 401) {

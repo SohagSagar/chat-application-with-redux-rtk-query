@@ -44,6 +44,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     })
 
                 } catch (error) {
+                    console.log(error);
 
                 }
                 await cacheEntryRemoved;
@@ -63,8 +64,8 @@ export const conversationsApi = apiSlice.injectEndpoints({
 
                         dispatch(apiSlice.util.updateQueryData("getConversations", email, (draft) => {
                             return {
-                                data:[...draft.data,...conversations.data],
-                                totalCount:draft.totalCount
+                                data: [...draft.data, ...conversations.data],
+                                totalCount: draft.totalCount
                             };
                         }))
                     }
@@ -86,24 +87,20 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 body: data,
 
             }),
-            invalidatesTags: ['conversations'],
+            
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 
                 //passimistic cache update
-
                 const conversation = await queryFulfilled;
+                const senderEmail = await arg.sender.email;
 
-                // const senderEmail = await arg.sender.email;
-                // console.log(conversation);
+                dispatch(apiSlice.util.updateQueryData('getConversations', senderEmail, (draft) => {
+                    return {
+                        data: [...draft.data, conversation.data].reverse()
+                    }
+                }))
 
-                // const patchAddConversation = dispatch(apiSlice.util.updateQueryData('getConversations',senderEmail , (draft) => {
-                //     draft.unshift(conversation)
-                // }))
-
-
-
-
-
+               
                 try {
                     if (conversation?.data?.id) {
                         const sender = arg.sender;
@@ -113,6 +110,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                             id: receiverWholeObject.id,
                             name: receiverWholeObject.name
                         }
+                        console.log(receiver);
 
                         dispatch(messagesApi.endpoints.addMessage.initiate({
 
@@ -166,6 +164,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         }
 
                         const res = await dispatch(messagesApi.endpoints.addMessage.initiate({
+                            
 
                             conversationId: conversation?.data?.id,
                             sender,
@@ -178,13 +177,16 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         //passimistic cache update
                         dispatch(apiSlice.util.updateQueryData("getMessages", res.conversationId.toString(), (draft) => {
 
-                            draft.unshift(res);
+                            return {
+                                data:[res,...draft.data],
+                                totalCount:draft.totalCount
+                            }
                         }))
 
                     }
 
                 } catch (error) {
-                    optimicUpdateForEditConversation.undo()
+                    // optimicUpdateForEditConversation.undo()
                 }
 
             }

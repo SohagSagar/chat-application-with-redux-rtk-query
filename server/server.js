@@ -14,9 +14,6 @@ router.render = (req, res) => {
     const path = req.path;
     const method = req.method;
 
-    console.log('method:',method);
-    console.log('path:',path);
-
     if (path.includes("/conversations") && (method === "POST" || method === "PATCH")) {
         
         //emit socket event

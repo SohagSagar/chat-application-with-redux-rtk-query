@@ -5,8 +5,15 @@ import { apiSlice } from "../api/apiSlice";
 export const messagesApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getMessages: builder.query({
-            query: (id) => `/messages?conversationId=${id}&_sort=timestamp&_order=desc&_page=1&_limit=5`,
+            query: (id) => `/messages?conversationId=${id}&_sort=timestamp&_order=desc&_page=1&_limit=10`,
 
+            transformResponse(apiResponse, meta) {
+
+                return {
+                    data: apiResponse,
+                    totalCount: meta.response.headers.get("X-Total-Count")
+                }
+            },
             async onCacheEntryAdded(arg, {
                 updateCachedData, cacheDataLoaded, cacheEntryRemoved
             }) {
@@ -26,14 +33,38 @@ export const messagesApi = apiSlice.injectEndpoints({
                     socket.on("messages", (data) => {
 
                         updateCachedData(draft => {
-                            
-                            // console.log('draft1', JSON.stringify(...draft));
-                            console.log(data.data);
-                            draft.unshift(JSON.parse(data.data))   
-                            
+                            //    draft.push(data.data)
 
                         })
                     })
+
+                } catch (error) {
+
+                }
+                await cacheEntryRemoved;
+                socket.close();
+            }
+        }),
+        getMoreMessages: builder.query({
+
+            query: ({ id, page }) => `/messages?conversationId=${id}&_sort=timestamp&_order=desc&_page=${page}&_limit=10`,
+
+
+
+            async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+
+                try {
+                    const messages = await queryFulfilled;
+
+                    if (messages?.data?.length > 0) {
+                        dispatch(apiSlice.util.updateQueryData("getMessages", id.toString(), (draft) => {
+
+                            return {
+                                data: [...draft.data,...messages.data, ],
+                                totalCount: draft.totalCount
+                            };
+                        }))
+                    }
 
                 } catch (error) {
 
@@ -45,7 +76,7 @@ export const messagesApi = apiSlice.injectEndpoints({
                 url: '/messages',
                 method: 'POST',
                 body: data
-            })
+            }),
         }),
     })
 })
