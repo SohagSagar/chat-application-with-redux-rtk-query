@@ -32,6 +32,7 @@ router.render = (req, res) => {
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 9000;
 
+
 // Bind the router db to the app
 app.db = router.db;
 
@@ -42,6 +43,7 @@ const rules = auth.rewriter({
     conversations: 660,
     messages: 660,
 });
+
 
 app.use(rules);
 app.use(auth);

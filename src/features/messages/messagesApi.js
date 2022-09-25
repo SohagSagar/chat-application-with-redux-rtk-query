@@ -18,7 +18,7 @@ export const messagesApi = apiSlice.injectEndpoints({
                 updateCachedData, cacheDataLoaded, cacheEntryRemoved
             }) {
                 //create socket
-                const socket = io('http://localhost:9000', {
+                const socket = io(process.env.REACT_APP_API_URL, {
                     reconnectionDelay: 1000,
                     reconnection: true,
                     reconnectionAttempts: 10,
@@ -31,9 +31,18 @@ export const messagesApi = apiSlice.injectEndpoints({
 
                     await cacheDataLoaded;
                     socket.on("messages", (data) => {
-
+                        console.log(data);
                         updateCachedData(draft => {
-                            //    draft.push(data.data)
+                            // console.log(JSON.stringify(draft));
+                            // return draft
+                            // if(!data.data.length){
+                            //     return {
+                            //         data:[...draft.data,data.data],
+                            //         totalCount:draft.totalCount
+                                    
+                            //    }
+                            // }
+                            
 
                         })
                     })
@@ -60,7 +69,7 @@ export const messagesApi = apiSlice.injectEndpoints({
                         dispatch(apiSlice.util.updateQueryData("getMessages", id.toString(), (draft) => {
 
                             return {
-                                data: [...draft.data,...messages.data, ],
+                                data: [...draft.data, ...messages.data,],
                                 totalCount: draft.totalCount
                             };
                         }))
